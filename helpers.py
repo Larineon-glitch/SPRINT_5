@@ -2,10 +2,10 @@ import random
 import string
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from locators import MainPageLocators, LoginPageLocators, RegistrationPageLocators
+from locators import LoginPageLocators, RegistrationPageLocators
 from data import Urls
 
-# --- Генераторы данных (реальные генераторы) ---
+# Генераторы данных  
 def generate_email():
     names = ['test', 'ivan', 'petr', 'alex', 'maria']
     surnames = ['testov', 'ivanov', 'petrov']
@@ -24,9 +24,9 @@ def generate_name():
     names = ['Alexander', 'Maria', 'Dmitry', 'Elena', 'Ivan']
     return random.choice(names)
 
-# --- Вспомогательные функции для тестов ---
+# Вспомогательные функции для тестов 
 def register_user(driver, name, email, password):
-    """Регистрирует пользователя"""
+    # Регистрирует пользователя 
     driver.get(Urls.REGISTER_PAGE)
     driver.find_element(*RegistrationPageLocators.NAME_INPUT).send_keys(name)
     driver.find_element(*RegistrationPageLocators.EMAIL_INPUT).send_keys(email)
@@ -35,7 +35,7 @@ def register_user(driver, name, email, password):
     WebDriverWait(driver, 5).until(EC.url_to_be(Urls.LOGIN_PAGE))
 
 def login_user(driver, email, password):
-    """Выполняет вход пользователя"""
+    # Выполняет вход пользователя 
     driver.find_element(*LoginPageLocators.EMAIL_INPUT).send_keys(email)
     driver.find_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(password)
     driver.find_element(*LoginPageLocators.LOGIN_SUBMIT_BUTTON).click()
